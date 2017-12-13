@@ -39,6 +39,7 @@ defmodule GraphqlReddit.Mixfile do
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 3.0"},
+      {:httpoison, "~> 0.13"},
     ]
   end
 end

@@ -5,7 +5,13 @@ defmodule GraphqlRedditWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", GraphqlRedditWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: GraphqlRedditWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: GraphqlRedditWeb.Schema
   end
 end
