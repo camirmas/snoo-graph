@@ -3,17 +3,15 @@ defmodule GraphqlRedditWeb.Content do
 
   def list_posts(subreddit) do
     subreddit
-    |> request
-    |> Poison.decode!
+    |> subreddit_url()
+    |> request()
+    |> Poison.decode!()
     |> Kernel.get_in(["data", "children"])
     |> Enum.map(fn post -> post["data"] end)
   end
 
-  defp request(subreddit) do
-    {:ok, %HTTPoison.Response{body: body}} =
-      subreddit
-      |> subreddit_url()
-      |> HTTPoison.get()
+  defp request(url) do
+    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
 
     body
   end
