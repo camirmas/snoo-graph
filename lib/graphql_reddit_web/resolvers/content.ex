@@ -10,4 +10,8 @@ defmodule GraphqlRedditWeb.Resolvers.Content do
   def list_comments(%{ "subreddit" => subreddit, "id" => post }, _args, _resolution) do
     {:ok, GraphqlRedditWeb.Content.list_comments(subreddit, post)}
   end
+
+  def list_replies(comment, args, resolution) do
+    {:ok, GraphqlRedditWeb.Content.list_replies(comment)}
+  end
 end

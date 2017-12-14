@@ -21,6 +21,8 @@ defmodule GraphqlRedditWeb.Schema.ContentTypes do
 
   object :comment do
     field :body, :string, resolve: key("body")
-    #field :replies, list_of(:comment)
+    field :replies, list_of(:comment) do
+      resolve &Resolvers.Content.list_replies/3
+    end
   end
 end

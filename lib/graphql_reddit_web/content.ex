@@ -20,6 +20,16 @@ defmodule GraphqlRedditWeb.Content do
     |> Enum.map(fn comment -> comment["data"] end)
   end
 
+  def list_replies(%{"replies" => ""}) do
+    []
+  end
+
+  def list_replies(comment) do
+    comment
+    |> Kernel.get_in(["replies", "data", "children"])
+    |> Enum.map(fn comment -> comment["data"] end)
+  end
+
   defp request(url) do
     {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
 
