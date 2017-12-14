@@ -18,5 +18,12 @@ defmodule GraphqlRedditWeb.Schema do
       arg :username, non_null(:string)
       resolve &Resolvers.Accounts.get_user/3
     end
+
+    @desc "Get comments for a post"
+    field :comments, list_of(:comment) do
+      arg :sub, non_null(:string)
+      arg :post, non_null(:string)
+      resolve &Resolvers.Content.list_comments/3
+    end
   end
 end
